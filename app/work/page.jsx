@@ -38,7 +38,7 @@ const projects = [
     description:
       "This website is dedicated to promoting Shadow Creek Summer Tennis Camp programs and aimed at fostering a love for tennis and developing skills in players of all ages and levels.di.",
     stack: [{ name: "HTML" }, { name: "CSS" }, { name: "Javascript" }],
-    image: "/assets/work/tennis.jpg",
+    image: "/assets/work/tenniscamp.png",
     live: "https://www.sctenniscamp.org/",
     github: "https://github.com/kacemettahali/TennisWeb",
   },
