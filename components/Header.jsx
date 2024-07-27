@@ -12,7 +12,7 @@ const Header = () => {
         {/* logo */}
         <Link href="/" legacyBehavior>
           <a className="flex items-center gap-2">
-            <img src="/icon.ico" alt="Icon" className="w-12 h-12" />
+            <img src="icon.ico" alt="Icon" className="w-12 h-12" />
             <h1 className="text-4xl font-semibold flex items-center">
               Kacem<span className="text-accent">.</span>
             </h1>
