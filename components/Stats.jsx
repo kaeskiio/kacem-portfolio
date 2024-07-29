@@ -13,7 +13,7 @@ const stats = [
   },
   {
     num: 10,
-    text: "Languages mastered",
+    text: "Languages proficient in",
   },
   {
     num: 250,

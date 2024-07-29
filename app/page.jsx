@@ -18,7 +18,7 @@ const Home = () => {
               Hello,<br /> I'm  <span className="text-accent">Kacem Ettahali</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">
-            I am a skilled coder proficient in multiple programming languages, including Python, JavaScript, Java, and C++. My broad expertise allows me to develop effective solutions and adapt quickly to new technologies.
+            I am a programmer proficient in multiple languages, including Python, JavaScript, Java, and C++. My experience allows me to develop effective solutions and adapt to new technologies.
             </p>
             {/* btn and socials */}
             <div className="flex flex-col xl:flex-row items-center gap-8">

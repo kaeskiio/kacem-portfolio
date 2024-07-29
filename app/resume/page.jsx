@@ -24,7 +24,7 @@ import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
 const about = {
   title: "About me",
   description:
-    "I am a rising senior at Shadow Creek High School in Pearland, Texas. I am an avid programmer who loves to create websites for the need of my community. I am an extremely ambitious, hardworking, and determined person and strive to improve my skills every day. I participate in many activities such as my tennis, programming projects, going to the gym, and participating in the First Racquet Organization as the Executive VP of Directors.",
+    "I am a rising senior at Shadow Creek High School in Pearland, Texas. I am an avid programmer who loves to create websites for the need of my community. I am an ambitious and creative coder and strive to improve my skills every day. I participate in many activities such as my tennis, programming projects, going to the gym, and participating in the First Racquet Organization as the Executive VP of Directors.",
   info: [
     {
       fieldName: "Name",
