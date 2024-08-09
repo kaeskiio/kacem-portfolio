@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { FiDownload } from "react-icons/fi";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 // components
 import Social from "@/components/Social";

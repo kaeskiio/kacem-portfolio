@@ -16,9 +16,15 @@ import {
   FaPython,
   FaBook,
   FaCode,
+  FaChartBar,
+  FaDatabase,
+  FaGit,
+  FaGithub,
 } from "react-icons/fa";
 
 import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
+
+
 
 // about data
 const about = {
@@ -148,6 +154,22 @@ const skills = {
     {
       icon: <FaSwift />,
       name: "swift",
+    },
+    {
+      icon: <FaCode />,
+      name: "C++",
+    },
+    {
+      icon: <FaChartBar />,
+      name: "R",
+    },
+    {
+      icon: <FaDatabase />,
+      name: "SQL",
+    },
+    {
+      icon: <FaGithub />,
+      name: "github",
     },
     {
       icon: <FaCalculator />,
