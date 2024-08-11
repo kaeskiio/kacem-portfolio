@@ -77,6 +77,11 @@ const experience = {
       duration: "2022 - Present",
     },
     {
+      company: "@ Rice University PATHS-UP Summer Program",
+      position: "Instructor",
+      duration: "2024",
+    },
+    {
       company: "@ iCode Pearland",
       position: "Lead Instructor",
       duration: "2023 - 2024",
@@ -102,6 +107,16 @@ const education = {
       duration: "2021-2025",
     },
     {
+      institution: "IBM Data Science (6 months @ 10hrs/wk)",
+      degree: "Coursera Certificate",
+      duration: "2024",
+    },
+    {
+      institution: "Wharton Entrepreneurship (1 month @ 10hrs/wk)",
+      degree: "Coursera Certificate",
+      duration: "2024",
+    },
+    {
       institution: "AP Computer Science A",
       degree: "Perfect Score",
       duration: "2022",
@@ -117,23 +132,23 @@ const skills = {
   skillList: [
     {
       icon: <FaHtml5 />,
-      name: "html",
+      name: "Html",
     },
     {
       icon: <FaCss3 />,
-      name: "css",
+      name: "CSS",
     },
     {
       icon: <FaJs />,
-      name: "javascript",
+      name: "Javascript",
     },
     {
       icon: <FaReact />,
-      name: "react.js",
+      name: "React.js",
     },
     {
       icon: <SiNextdotjs />,
-      name: "next.js",
+      name: "Next.js",
     },
     {
       icon: <SiTailwindcss />,
@@ -141,19 +156,19 @@ const skills = {
     },
     {
       icon: <FaPython />,
-      name: "python",
+      name: "Python",
     },
     {
       icon: <FaNodeJs />,
-      name: "node.js",
+      name: "Node.js",
     },
     {
       icon: <FaJava />,
-      name: "java",
+      name: "Java",
     },
     {
       icon: <FaSwift />,
-      name: "swift",
+      name: "Swift",
     },
     {
       icon: <FaCode />,
@@ -169,7 +184,7 @@ const skills = {
     },
     {
       icon: <FaGithub />,
-      name: "github",
+      name: "Github",
     },
     {
       icon: <FaCalculator />,
