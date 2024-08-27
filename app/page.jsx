@@ -40,7 +40,6 @@ const Home = () => {
         </div>
       </div>
       <Stats />
-    #test
       <Analytics />
     </section>
   );

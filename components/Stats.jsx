@@ -16,7 +16,7 @@ const stats = [
     text: "Languages proficient in",
   },
   {
-    num: 250,
+    num: 300,
     text: "Code commits",
   },
 ];
