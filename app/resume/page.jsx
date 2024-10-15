@@ -22,7 +22,15 @@ import {
   FaGithub,
 } from "react-icons/fa";
 
-import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
+import { 
+  SiTailwindcss, 
+  SiNextdotjs, 
+  SiScikitlearn,
+  SiTensorflow, 
+  SiPandas,
+  SiNumpy,
+} from "react-icons/si";
+
 
 
 
@@ -182,6 +190,22 @@ const skills = {
       icon: <FaDatabase />,
       name: "SQL",
     },
+    {
+      icon: <SiScikitlearn />,
+      name: "Sci-kit Learn",
+    },   
+    {
+      icon: <SiTensorflow />,
+      name: "TensorFlow",
+    },   
+    {
+      icon: <SiPandas />,
+      name: "Pandas (Python)",
+    },
+    {
+      icon: <SiNumpy />,
+      name: "NumPy",
+    },           
     {
       icon: <FaGithub />,
       name: "Github",
