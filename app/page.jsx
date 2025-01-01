@@ -41,6 +41,7 @@ const Home = () => {
       </div>
       <Stats />
       <Analytics />
+      <SpeedInsights/>
     </section>
   );
 };
