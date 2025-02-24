@@ -30,7 +30,7 @@ const info = [
   {
     icon: <FaMapMarkerAlt />,
     title: "Affiliation",
-    description: "Shadow Creek High School",
+    description: "Rice University",
   },
 ];
 

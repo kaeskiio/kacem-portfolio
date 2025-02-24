@@ -38,7 +38,7 @@ import {
 const about = {
   title: "About me",
   description:
-    "I am a rising senior at Shadow Creek High School in Pearland, Texas. I am an avid programmer who loves to create websites for the need of my community. I am an ambitious and creative coder and strive to improve my skills every day. I participate in many activities such as my tennis, programming projects, going to the gym, and participating in the First Racquet Organization as the Executive VP of Directors.",
+    "I am an avid programmer who loves to create websites for the need of my community. I am an ambitious and creative coder and strive to improve my skills every day. I participate in many activities such as my tennis, programming projects, going to the gym, and participating in the First Racquet Organization as the Executive VP of Directors.",
   info: [
     {
       fieldName: "Name",
@@ -105,15 +105,10 @@ const experience = {
 // education data
 const education = {
   icon: "/assets/resume/cap.svg",
-  title: "My education",
+  title: "My Education",
   description:
     "",
   items: [
-    {
-      institution: "Shadow Creek High School",
-      degree: "High School Diploma",
-      duration: "2021-2025",
-    },
     {
       institution: "IBM Data Science (6 months @ 10hrs/wk)",
       degree: "Coursera Certificate",
