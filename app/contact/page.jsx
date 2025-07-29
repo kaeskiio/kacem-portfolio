@@ -20,7 +20,7 @@ const info = [
   {
     icon: <FaEnvelope />,
     title: "Email",
-    description: "101kacem101@gmail.com",
+    description: "ke35@rice.edu",
   },
   {
     icon: <FaMapMarkerAlt />,
@@ -66,10 +66,10 @@ const Contact = () => {
               <SelectGroup>
                 <SelectLabel>Select a service</SelectLabel>
                 <SelectItem value="N/A">N/A</SelectItem>
-                <SelectItem value="web-development">Web Development</SelectItem>
-                <SelectItem value="ui-ux-design">UI/UX Design</SelectItem>
-                <SelectItem value="ios-app-development">iOS App Development</SelectItem>
-                <SelectItem value="frontend-development">Frontend Development</SelectItem>
+                <SelectItem value="ai-ml-development">AI/ML Development</SelectItem>
+                <SelectItem value="computer-vision">Computer Vision</SelectItem>
+                <SelectItem value="full-stack-development">Full-Stack Development</SelectItem>
+                <SelectItem value="low-level-programming">Low-Level Programming</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
