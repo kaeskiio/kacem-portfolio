@@ -38,15 +38,11 @@ import {
 const about = {
   title: "About me",
   description:
-    "I am an avid programmer who loves to create websites for the need of my community. I am an ambitious and creative coder and strive to improve my skills every day. I participate in many activities such as my tennis, programming projects, going to the gym, and participating in the First Racquet Organization as the Executive VP of Directors.",
+    "I am a Computer Science student at Rice University with a concentration in Artificial Intelligence. I have extensive experience in AI/ML, full-stack development, and low-level programming. My work spans from mission-critical satellite algorithms at Lockheed Martin to cutting-edge AI research at MIT/Harvard, achieving significant performance improvements and building scalable systems.",
   info: [
     {
       fieldName: "Name",
       fieldValue: "Kacem Ettahali",
-    },
-    {
-      fieldName: "Phone",
-      fieldValue: "(+1) 832 410 2200",
     },
     {
       fieldName: "Experience",
@@ -54,15 +50,11 @@ const about = {
     },
     {
       fieldName: "Email",
-      fieldValue: "101kacem101@gmail.com",
+      fieldValue: "ke35@rice.edu",
     },
     {
       fieldName: "Languages",
       fieldValue: "English, Arabic",
-    },
-    {
-      fieldName: "Nationality",
-      fieldValue: "Moroccan",
     },
   ],
 };
@@ -80,49 +72,24 @@ const experience = {
   description: "",
   items: [
     {
-      company: "Independent",
-      position: "Full Stack Developer",
-      duration: "2022 - Present",
+      company: "MIT & Harvard",
+      position: "AI/ML & Full-Stack Software Engineer",
+      duration: "May 2025 – Present",
     },
     {
-      company: "@ Rice University PATHS-UP Summer Program",
+      company: "Lockheed Martin",
+      position: "Software Engineer",
+      duration: "June 2025 – August 2025",
+    },
+    {
+      company: "University of Texas at Austin",
+      position: "Research Software Engineer",
+      duration: "June 2024 – March 2025",
+    },
+    {
+      company: "Rice University PATHS-UP Summer Program",
       position: "Instructor",
       duration: "2024",
-    },
-    {
-      company: "@ iCode Pearland",
-      position: "Lead Instructor",
-      duration: "2023 - 2024",
-    },
-    {
-      company: "iOS Design",
-      position: "Front-End Developer",
-      duration: "2023",
-    },
-  ],
-};
-
-// education data
-const education = {
-  icon: "/assets/resume/cap.svg",
-  title: "My Education",
-  description:
-    "",
-  items: [
-    {
-      institution: "IBM Data Science (6 months @ 10hrs/wk)",
-      degree: "Coursera Certificate",
-      duration: "2024",
-    },
-    {
-      institution: "Wharton Entrepreneurship (1 month @ 10hrs/wk)",
-      degree: "Coursera Certificate",
-      duration: "2024",
-    },
-    {
-      institution: "AP Computer Science A",
-      degree: "Perfect Score",
-      duration: "2022",
     },
   ],
 };
@@ -131,7 +98,7 @@ const education = {
 const skills = {
   title: "My skills",
   description:
-    "I am adept at utilizing many frameworks and languages.",
+    "I am adept at utilizing many frameworks and languages across AI/ML, full-stack development, and low-level programming.",
   skillList: [
     {
       icon: <FaHtml5 />,
@@ -200,7 +167,11 @@ const skills = {
     {
       icon: <SiNumpy />,
       name: "NumPy",
-    },           
+    },
+    {
+      icon: <FaFlask />,
+      name: "Flask",
+    },
     {
       icon: <FaGithub />,
       name: "Github",
@@ -213,7 +184,6 @@ const skills = {
       icon: <FaSuperscript />,
       name: "Linear Algebra",
     },
-
   ],
 };
 
@@ -249,7 +219,6 @@ const Resume = () => {
             <TabsTrigger value="skills">Skills</TabsTrigger>
             <TabsTrigger value="experience">Experience</TabsTrigger>
             <TabsTrigger value="volunteering">Volunteering</TabsTrigger>
-            <TabsTrigger value="education">Education</TabsTrigger>
           </TabsList>
 
           {/* content */}
@@ -277,38 +246,6 @@ const Resume = () => {
                             {/* dot */}
                             <span className="w-[6px] h-[6px] rounded-full bg-accent"></span>
                             <p className="text-white/60">{item.company}</p>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </ScrollArea>
-              </div>
-            </TabsContent>
-
-            {/* education */}
-            <TabsContent value="education" className="w-full">
-              <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                <h3 className="text-4xl font-bold">{education.title}</h3>
-                <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
-                  {education.description}
-                </p>
-                <ScrollArea className="h-[400px]">
-                  <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
-                    {education.items.map((item, index) => {
-                      return (
-                        <li
-                          key={index}
-                          className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
-                        >
-                          <span className="text-accent">{item.duration}</span>
-                          <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">
-                            {item.degree}
-                          </h3>
-                          <div className="flex items-center gap-3">
-                            {/* dot */}
-                            <span className="w-[6px] h-[6px] rounded-full bg-accent"></span>
-                            <p className="text-white/60">{item.institution}</p>
                           </div>
                         </li>
                       );
