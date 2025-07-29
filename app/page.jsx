@@ -15,12 +15,12 @@ const Home = () => {
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
           {/* text */}
           <div className="text-center xl:text-left order-2 xl:order-none">
-            <span className="text-xl">Software Developer</span>
+            <span className="text-xl">AI/ML & Full-Stack Software Engineer</span>
             <h1 className="h1 mb-6">
               Hello,<br /> I'm  <span className="text-accent">Kacem Ettahali</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">
-            I am a programmer proficient in multiple languages, including Python, JavaScript, Java, and C++. My experience allows me to develop effective solutions and adapt to new technologies.
+            I'm a Computer Science student at Rice University specializing in AI, with experience at Lockheed Martin, MIT, Harvard, and UT Austin. I've achieved 346% runtime improvements in satellite algorithms, built AI platforms processing 10,000+ datasets, and developed innovative computer vision projects with 98% accuracy.
             </p>
             {/* btn and socials */}
             <div className="flex flex-col xl:flex-row items-center gap-8">
