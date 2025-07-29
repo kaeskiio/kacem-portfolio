@@ -22,8 +22,30 @@ import WorkSliderBtns from "@/components/WorkSliderBtns";
 const projects = [
   {
     num: "01",
+    category: "Valorant CV Mouse Controller",
+    title: "Arduino-based Computer Vision System",
+    description:
+      "Engineered an Arduino-based mouse control system with 100% input precision, leveraging custom firmware for sub-millisecond response times. Implemented real-time object tracking algorithms using OpenCV, achieving 144 FPS and 100% accuracy through HSV color space analysis.",
+    stack: [{ name: "Arduino" }, { name: "Python" }, { name: "OpenCV" }, { name: "Tkinter" }],
+    image: "",
+    live: "",
+    github: "https://github.com/kaeskiio/valorant-cv-mouse-controller",
+  },
+  {
+    num: "02",
+    category: "Naruto Hand Sign Classifier",
+    title: "Computer Vision Hand Recognition",
+    description:
+      "Developed a hand recognition system using webcam input to detect 12+ Naruto jutsus with 98% accuracy. Repurposed pipeline for ASL gesture recognition, enabling translation of signs into closed captions with ~150ms latency and 92% classification accuracy.",
+    stack: [{ name: "Python" }, { name: "OpenCV" }],
+    image: "",
+    live: "",
+    github: "",
+  },
+  {
+    num: "03",
     category: "Chemistry Memory",
-    title: "project 1",
+    title: "Educational Web Application",
     description:
       "This website provides chemistry students with effective and interactive practice tools that make memorization not only achievable but also enjoyable.",
     stack: [{ name: "Html" }, { name: "CSS" }, { name: "Javascript" }],
@@ -32,59 +54,37 @@ const projects = [
     github: "https://github.com/kacemettahali/ChemistryWeb",
   },
   {
-    num: "02",
+    num: "04",
     category: "Shadow Creek Tennis Camp",
-    title: "project 2",
+    title: "Tennis Camp Website",
     description:
-      "This website is dedicated to promoting Shadow Creek Summer Tennis Camp programs and aimed at fostering a love for tennis and developing skills in players of all ages and levels.di.",
+      "This website is dedicated to promoting Shadow Creek Summer Tennis Camp programs and aimed at fostering a love for tennis and developing skills in players of all ages and levels.",
     stack: [{ name: "HTML" }, { name: "CSS" }, { name: "Javascript" }],
     image: "/assets/work/tenniscamp.png",
     live: "https://www.sctenniscamp.org/",
     github: "https://github.com/kacemettahali/TennisWeb",
   },
   {
-    num: "03",
-    category: "OwlPhysiomonitor",
-    title: "project 3",
-    description:
-      "The website provides underserved populations with the opportunity for quality healthcare and aid.",
-    stack: [{ name: "HTML" }, { name: "CSS" }, { name: "Javascript" }],
-    image: "/assets/work/health.jpg",
-    live: "https://www.OwlPhysiomonitor.com",
-    github: "https://github.com/kacemettahali/YoungScholars",
-  },
-  {
-    num: "04",
-    category: "Weather App UI",
-    title: "project 4",
-    description:
-      "A sleek and intuitive interface for checking current weather conditions and forecasts. Features include temperature readings and weather icons for easy navigation.",
-    stack: [{ name: "Swift" }],
-    image: "/assets/work/weather.jpg",
-    live: "",
-    github: "https://github.com/kacemettahali/WeatherApp",
-  },
-  {
     num: "05",
+    category: "IPhone 15 Pro Web",
+    title: "Apple Website Replica",
+    description:
+      "This project is a replica of Apple's iPhone 15 Pro Titanium website with advanced animations and 3D effects.",
+    stack: [{ name: "React.js" }, {name: "Tailwind.css"}, {name: "GSAP"}, {name: "Three.js"}, {name: "Vite"}],
+    image: "/assets/work/iphone.jpeg",
+    live: "",
+    github: "https://github.com/kacemettahali/IPhone-15Pro-Web",
+  },
+  {
+    num: "06",
     category: "Computer Vision Game",
-    title: "project 5",
+    title: "Pixel Reveal Game",
     description:
       "Guess the hidden image as random pixels are gradually revealed. Identify the image with as few revealed pixels as possible. Models Computer Vision.",
     stack: [{ name: "Python" }],
     image: "/assets/work/vision.jpg",
     live: "",
     github: "https://github.com/kacemettahali/computerVisionGame",
-  },
-  {
-    num: "06",
-    category: "IPhone 15 Pro Web",
-    title: "project 6",
-    description:
-      "This project is a replica of Apple's iPhone 15 Pro Titanium(my phone) website.",
-    stack: [{ name: "React.js" }, {name: "Tailwind.css"}, {name: "GSAP"}, {name: "Three.js"}, {name: "Vite"}],
-    image: "/assets/work/iphone.jpeg",
-    live: "",
-    github: "https://github.com/kacemettahali/IPhone-15Pro-Web",
   },
 ];
 
@@ -179,14 +179,24 @@ const Work = () => {
                     <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
                       {/* overlay */}
                       <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
-                      {/* image */}
+                      {/* image or placeholder */}
                       <div className="relative w-full h-full">
-                        <Image
-                          src={project.image}
-                          fill
-                          className="object-cover"
-                          alt=""
-                        />
+                        {project.image ? (
+                          <Image
+                            src={project.image}
+                            fill
+                            className="object-cover"
+                            alt=""
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <div className="text-center text-white/60">
+                              <div className="text-6xl mb-4">📁</div>
+                              <div className="text-xl font-semibold">{project.category}</div>
+                              <div className="text-sm">No preview available</div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </SwiperSlide>
