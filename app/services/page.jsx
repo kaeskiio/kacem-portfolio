@@ -6,26 +6,26 @@ import Link from "next/link";
 const services = [
   {
     num: "01",
-    title: "Backend Development",
-    description: "Building and maintaining server-side infrastructure",
+    title: "AI/ML Development",
+    description: "Building transformer-based knowledge retrieval systems, deep learning pipelines, and autonomous AI agents with 94% accuracy",
     href: "",
   },
   {
     num: "02",
-    title: "UI/UX Design",
-    description: "Designing Web/App interfaces",
+    title: "Computer Vision",
+    description: "Developing real-time object tracking algorithms, hand recognition systems, and image processing pipelines with OpenCV",
     href: "",
   },
   {
     num: "03",
-    title: "iOS App Development",
-    description: "Creating applications for iOS devices",
+    title: "Full-Stack Development",
+    description: "Creating scalable web applications with React, Next.js, and backend infrastructure using Flask, PostgreSQL, and Docker",
     href: "",
   },
   {
     num: "04",
-    title: "Frontend Development",
-    description: "Developing the client-side of applications",
+    title: "Low-Level Programming",
+    description: "Engineering mission-critical C++ algorithms with SIMD optimization, embedded systems, and RTOS environments",
     href: "",
   },  
 ];
