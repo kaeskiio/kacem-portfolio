@@ -1,10 +1,10 @@
 :root {
-  --paper: #eee9dd;
-  --paper-deep: #e4ddcd;
-  --ink: #26221c;
-  --muted: #655e52;
-  --rule: #d3cab7;
-  --clay: #9a4b29;
+  --paper: #f6f3ec;
+  --paper-deep: #ece8df;
+  --ink: #1f1e1b;
+  --muted: #6b6862;
+  --rule: #e0dbd0;
+  --clay: #a8502b;
 
   --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -13,12 +13,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper: #1e1b16;
-    --paper-deep: #29251e;
-    --ink: #e9e3d6;
-    --muted: #a59d8e;
-    --rule: #3b352b;
-    --clay: #dc946e;
+    --paper: #181816;
+    --paper-deep: #232320;
+    --ink: #ecebe6;
+    --muted: #a29f97;
+    --rule: #34332f;
+    --clay: #e39a72;
   }
 }
 
