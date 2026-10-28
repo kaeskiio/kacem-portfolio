@@ -1,6 +1,7 @@
 ---
 title: The speed limit on generating a token
 summary: Before writing any CUDA for my inference engine, I worked out how fast a 1B model can possibly decode and where its bytes actually go.
+category: Inference
 tags: Inference, Systems
 order: 0
 ---

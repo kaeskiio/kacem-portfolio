@@ -1,6 +1,7 @@
 ---
 title: Training a model against a frozen deception monitor
 summary: An adapter trained on monitor-derived targets made verification more selective than a matched control, but no more than the base model already was.
+category: AI safety
 tags: Deception monitoring, Fine-tuning
 order: 3
 ---

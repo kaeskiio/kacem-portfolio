@@ -1,6 +1,7 @@
 ---
 title: How a biased grade leaks into decisions about monitors
 summary: Recall measured on confirmed lies would certify a monitor that misses its bar, and makes a weaker monitor look as good as a stronger one.
+category: AI safety
 tags: Deception monitoring, Evaluation
 order: 4
 ---

@@ -1,6 +1,7 @@
 ---
 title: The model decides which of its lies get checked
 summary: Scoring a deception monitor only on lies the model later confirmed made it look 20 points better than it was, with no adversary involved.
+category: AI safety
 tags: Deception monitoring, Evaluation
 order: 1
 ---

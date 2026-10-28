@@ -207,6 +207,40 @@ time {
   font-variant-numeric: tabular-nums;
 }
 
+.tags .category {
+  color: var(--clay);
+}
+
+.category-group h3 {
+  font-size: 0.95rem;
+  font-weight: 400;
+  font-style: italic;
+  margin: 1.6rem 0 0.6rem;
+}
+
+.category-group h3 a {
+  color: var(--muted);
+}
+
+.category-group:first-of-type h3 {
+  margin-top: 0;
+}
+
+main > section > h2 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.category-group h3 a:hover,
+main > section > h2 a:hover {
+  color: var(--clay);
+}
+
+.more {
+  font-size: 0.95rem;
+  margin-top: -0.3rem;
+}
+
 .current {
   color: var(--muted);
 }

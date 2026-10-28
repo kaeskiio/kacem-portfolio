@@ -17,6 +17,9 @@ export default {
   intro:
     "I study computer science at Rice University, concentrating in artificial intelligence and mathematics. I've worked as a machine learning engineer at DoorDash and done research at Lockheed Martin, MIT, and Harvard.",
 
+  // Writing categories, in the order they appear. Each post sets one with `category:`.
+  categories: ["AI safety", "Inference"],
+
   // Papers and research projects. Leave the list empty to hide the section.
   // Example entry:
   // {

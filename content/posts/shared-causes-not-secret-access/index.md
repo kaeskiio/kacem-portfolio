@@ -1,6 +1,7 @@
 ---
 title: The model doesn't need to see the monitor
 summary: Simple observable features predict what the probe flags and reproduce the bias when used to pick what gets verified, and reweighting can't fully undo it.
+category: AI safety
 tags: Deception monitoring, Evaluation, Interpretability
 order: 2
 ---

@@ -152,7 +152,8 @@ function loadPosts() {
       .map((t) => t.trim())
       .filter(Boolean);
     const order = data.order === undefined || data.order === "" ? Infinity : Number(data.order);
-    posts.push({ ...data, tags, order, slug, body, assetsDir });
+    const category = String(data.category ?? "").trim() || "Other";
+    posts.push({ ...data, tags, category, order, slug, body, assetsDir });
   }
   // Lower `order` first; posts without one go last, alphabetically.
   return posts.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
@@ -169,6 +170,16 @@ function collectTags(posts) {
   for (const p of posts) for (const t of p.tags) tags.set(t, [...(tags.get(t) ?? []), p]);
   return [...tags.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
 }
+
+function collectCategories(posts) {
+  const groups = new Map();
+  for (const p of posts) groups.set(p.category, [...(groups.get(p.category) ?? []), p]);
+  const preferred = site.categories ?? [];
+  const rank = (c) => (preferred.includes(c) ? preferred.indexOf(c) : preferred.length + (c === "Other" ? 1 : 0));
+  return [...groups.entries()].sort((a, b) => rank(a[0]) - rank(b[0]) || a[0].localeCompare(b[0]));
+}
+
+const categoryUrl = (c) => `/writing/topics/${tagSlug(c)}/`;
 
 const tagLinks = (tags) =>
   tags.length
@@ -216,9 +227,18 @@ ${site.research
   }
 
   if (posts.length) {
+    const groups = collectCategories(posts)
+      .map(([c, ps]) => {
+        const more = ps.length > 3 ? `\n        <p class="more"><a href="${categoryUrl(c)}">All ${ps.length} posts on ${esc(c)}</a></p>` : "";
+        return `      <div class="category-group">
+        <h3><a href="${categoryUrl(c)}">${esc(c)}</a></h3>
+        ${postList(ps.slice(0, 3))}${more}
+      </div>`;
+      })
+      .join("\n");
     sections.push(`    <section aria-labelledby="writing">
       <h2 id="writing">Writing</h2>
-      ${postList(posts.slice(0, 5))}${posts.length > 5 ? `\n      <p><a href="/writing/">All ${posts.length} posts</a></p>` : ""}
+${groups}
     </section>`);
   }
 
@@ -252,7 +272,7 @@ ${site.projects
   return page({ body: sections.join("\n\n"), path: "/" });
 }
 
-function writingIndex(posts, tags) {
+function writingIndex(posts, categories) {
   if (!posts.length) {
     return page({
       title: "Writing",
@@ -260,16 +280,33 @@ function writingIndex(posts, tags) {
       path: "/writing/",
     });
   }
-  const nav = tags.length
-    ? `\n    <nav class="tag-nav" aria-label="Topics">${tags
-        .map(([t, ps]) => `<a href="/writing/tags/${tagSlug(t)}/">${esc(t)} <span class="count">${ps.length}</span></a>`)
-        .join(" ")}</nav>`
-    : "";
+  const nav = `\n    <nav class="tag-nav" aria-label="Topics">${categories
+    .map(([c, ps]) => `<a href="${categoryUrl(c)}">${esc(c)} <span class="count">${ps.length}</span></a>`)
+    .join(" ")}</nav>`;
+  const sections = categories
+    .map(
+      ([c, ps]) => `    <section aria-labelledby="cat-${tagSlug(c)}">
+      <h2 id="cat-${tagSlug(c)}"><a href="${categoryUrl(c)}">${esc(c)}</a></h2>
+      ${postList(ps)}
+    </section>`
+    )
+    .join("\n");
   return page({
     title: "Writing",
     description: `Writing by ${site.name}`,
-    body: `    <h1>Writing</h1>${nav}\n    ${postList(posts)}`,
+    body: `    <h1>Writing</h1>${nav}\n${sections}`,
     path: "/writing/",
+  });
+}
+
+function categoryPage(category, posts) {
+  return page({
+    title: category,
+    description: `Writing on ${category} by ${site.name}`,
+    body: `    <h1>${esc(category)}</h1>
+    <p class="muted">${posts.length} post${posts.length === 1 ? "" : "s"}. <a href="/writing/">All writing</a></p>
+    ${postList(posts)}`,
+    path: categoryUrl(category),
   });
 }
 
@@ -299,7 +336,9 @@ function postPage(post, tagMap) {
   const body = `    <article>
       <header class="post-header">
         <h1>${esc(post.title)}${post.draft ? ' <span class="draft">draft</span>' : ""}</h1>
-        ${tagLinks(post.tags)}
+        <p class="tags"><a class="category" href="${categoryUrl(post.category)}">${esc(post.category)}</a>${post.tags
+          .map((t) => ` <a href="/writing/tags/${tagSlug(t)}/">${esc(t)}</a>`)
+          .join("")}</p>
       </header>
 ${html}
     </article>${more}
@@ -329,8 +368,10 @@ copyDir(path.join(ROOT, "public"), OUT);
 const posts = loadPosts();
 const tags = collectTags(posts);
 const tagMap = new Map(tags);
+const categories = collectCategories(posts);
 write("index.html", homePage(posts));
-write("writing/index.html", writingIndex(posts, tags));
+write("writing/index.html", writingIndex(posts, categories));
+for (const [c, ps] of categories) write(`writing/topics/${tagSlug(c)}/index.html`, categoryPage(c, ps));
 write("404.html", notFound());
 for (const [tag, tagged] of tags) write(`writing/tags/${tagSlug(tag)}/index.html`, tagPage(tag, tagged));
 for (const post of posts) {

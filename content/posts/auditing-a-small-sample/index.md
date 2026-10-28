@@ -1,6 +1,7 @@
 ---
 title: A small random audit fixes most of it
 summary: Getting independent ground truth for 5 to 10 percent of unresolved episodes pulls an inflated recall estimate back to the truth.
+category: AI safety
 tags: Deception monitoring, Evaluation
 order: 5
 ---

@@ -1,6 +1,7 @@
 ---
 title: Zero Reward Doesn't Mean Zero Capability
 summary: Some math and toy simulations on why a flat RL reward curve says more about what got sampled than about what a model can do.
+category: AI safety
 tags: Reinforcement learning, Exploration hacking, Evaluation
 order: -1
 ---

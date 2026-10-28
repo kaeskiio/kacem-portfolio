@@ -1,6 +1,7 @@
 ---
 title: Post title in sentence case
 summary: One sentence that shows up under the title in post lists and link previews.
+category: AI safety
 tags: Deception monitoring, Evaluation
 order: 10
 draft: true
@@ -10,7 +11,7 @@ Copy this file to `content/posts/your-slug.md` (or `content/posts/your-slug/inde
 post has images) and remove `draft: true` when it's ready. Files starting with `_` are ignored.
 Drafts only appear when you run `npm run dev`.
 
-`tags` is a comma-separated list. Each tag gets its own page, and the first tag decides which
+`category` is the folder the post goes in on the writing page (the order of folders is set in `site.config.mjs`). `tags` is a comma-separated list. Each tag gets its own page, and the first tag decides which
 "More on" list shows at the end of the post. `order` sets where the post appears in lists
 (lower numbers first). Posts without an order go last, alphabetically.
 
