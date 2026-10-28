@@ -186,9 +186,53 @@ time {
   font-style: italic;
 }
 
-.post-list time {
-  display: block;
+.tags,
+.tag-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  margin: 0;
   font-size: 0.9rem;
+}
+
+.tags a,
+.tag-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.tags a:hover,
+.tag-nav a:hover {
+  color: var(--clay);
+}
+
+.tag-nav {
+  margin: -0.5rem 0 2.25rem;
+  font-size: 1rem;
+}
+
+.count {
+  font-size: 0.8em;
+  font-variant-numeric: tabular-nums;
+}
+
+.current {
+  color: var(--muted);
+}
+
+.related {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.related h2 {
+  font-size: 1rem;
+  margin: 0 0 1rem;
+}
+
+.related li {
+  margin-bottom: 0.5rem;
 }
 
 .cv {

@@ -18,7 +18,7 @@ Everything on the home page is in `site.config.mjs`: the focus sentence, intro, 
 
 1. Copy `content/posts/_template.md` to `content/posts/my-post.md`.
    If the post has images, use a folder instead: `content/posts/my-post/index.md`, with the images next to it.
-2. Fill in `title`, `date` (YYYY-MM-DD), and `summary`. Keep `draft: true` while writing.
+2. Fill in `title`, `summary`, `tags` (comma-separated), and optionally `order` (lower numbers are listed first). Keep `draft: true` while writing.
 3. Preview with `npm run dev`.
 4. Delete the `draft: true` line, commit, and push. Vercel rebuilds the site.
 

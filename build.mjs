@@ -20,14 +20,6 @@ const esc = (s) =>
 
 const inline = (s) => marked.parseInline(s ?? "");
 
-const formatDate = (d) =>
-  new Date(d + "T12:00:00Z").toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    timeZone: "UTC",
-  });
-
 function write(rel, html) {
   const file = path.join(OUT, rel);
   fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -153,24 +145,48 @@ function loadPosts() {
     } else continue;
 
     const { data, body } = parseFrontMatter(fs.readFileSync(file, "utf8"));
-    if (!data.title || !data.date) {
-      throw new Error(`${path.relative(ROOT, file)} needs "title" and "date" in its front matter`);
-    }
+    if (!data.title) throw new Error(`${path.relative(ROOT, file)} needs a "title" in its front matter`);
     if (data.draft && !INCLUDE_DRAFTS) continue;
-    posts.push({ ...data, slug, body, assetsDir });
+    const tags = String(data.tags ?? "")
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+    const order = data.order === undefined || data.order === "" ? Infinity : Number(data.order);
+    posts.push({ ...data, tags, order, slug, body, assetsDir });
   }
-  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  // Lower `order` first; posts without one go last, alphabetically.
+  return posts.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
 }
 
-function postList(posts) {
+const tagSlug = (t) =>
+  t
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+function collectTags(posts) {
+  const tags = new Map();
+  for (const p of posts) for (const t of p.tags) tags.set(t, [...(tags.get(t) ?? []), p]);
+  return [...tags.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+}
+
+const tagLinks = (tags) =>
+  tags.length
+    ? `<p class="tags">${tags.map((t) => `<a href="/writing/tags/${tagSlug(t)}/">${esc(t)}</a>`).join(" ")}</p>`
+    : "";
+
+function postList(posts, current) {
   return `<ul class="post-list">
 ${posts
-  .map(
-    (p) => `      <li>
-        <a href="/writing/${p.slug}/">${esc(p.title)}</a>${p.draft ? ' <span class="draft">draft</span>' : ""}
-        <time datetime="${p.date}">${formatDate(p.date)}</time>${p.summary ? `\n        <p>${inline(p.summary)}</p>` : ""}
-      </li>`
-  )
+  .map((p) => {
+    const title =
+      current && p.slug === current
+        ? `<span class="current">${esc(p.title)}</span>`
+        : `<a href="/writing/${p.slug}/">${esc(p.title)}</a>`;
+    const draft = p.draft ? ' <span class="draft">draft</span>' : "";
+    const summary = !current && p.summary ? `\n        <p>${inline(p.summary)}</p>` : "";
+    return `      <li>\n        ${title}${draft}${summary}\n      </li>`;
+  })
   .join("\n")}
     </ul>`;
 }
@@ -236,22 +252,57 @@ ${site.projects
   return page({ body: sections.join("\n\n"), path: "/" });
 }
 
-function writingIndex(posts) {
-  const body = posts.length
-    ? `    <h1>Writing</h1>\n    ${postList(posts)}`
-    : `    <h1>Writing</h1>\n    <p class="muted">No posts yet.</p>`;
-  return page({ title: "Writing", description: `Writing by ${site.name}`, body, path: "/writing/" });
+function writingIndex(posts, tags) {
+  if (!posts.length) {
+    return page({
+      title: "Writing",
+      body: `    <h1>Writing</h1>\n    <p class="muted">No posts yet.</p>`,
+      path: "/writing/",
+    });
+  }
+  const nav = tags.length
+    ? `\n    <nav class="tag-nav" aria-label="Topics">${tags
+        .map(([t, ps]) => `<a href="/writing/tags/${tagSlug(t)}/">${esc(t)} <span class="count">${ps.length}</span></a>`)
+        .join(" ")}</nav>`
+    : "";
+  return page({
+    title: "Writing",
+    description: `Writing by ${site.name}`,
+    body: `    <h1>Writing</h1>${nav}\n    ${postList(posts)}`,
+    path: "/writing/",
+  });
 }
 
-function postPage(post) {
+function tagPage(tag, posts) {
+  return page({
+    title: tag,
+    description: `Posts about ${tag.toLowerCase()} by ${site.name}`,
+    body: `    <h1>${esc(tag)}</h1>
+    <p class="muted">${posts.length} post${posts.length === 1 ? "" : "s"}. <a href="/writing/">All writing</a></p>
+    ${postList(posts)}`,
+    path: `/writing/tags/${tagSlug(tag)}/`,
+  });
+}
+
+function postPage(post, tagMap) {
   const { html, hasMath } = renderMarkdown(post.body);
+  const firstTag = post.tags[0];
+  const related = firstTag ? tagMap.get(firstTag) : null;
+  const more =
+    related && related.length > 1
+      ? `
+    <section class="related" aria-labelledby="related">
+      <h2 id="related">More on ${esc(firstTag.toLowerCase())}</h2>
+      ${postList(related, post.slug)}
+    </section>`
+      : "";
   const body = `    <article>
       <header class="post-header">
-        <h1>${esc(post.title)}</h1>
-        <time datetime="${post.date}">${formatDate(post.date)}</time>${post.draft ? ' <span class="draft">draft</span>' : ""}
+        <h1>${esc(post.title)}${post.draft ? ' <span class="draft">draft</span>' : ""}</h1>
+        ${tagLinks(post.tags)}
       </header>
 ${html}
-    </article>
+    </article>${more}
     <p class="back"><a href="/writing/">All writing</a></p>`;
   return page({
     title: post.title,
@@ -276,14 +327,19 @@ fs.rmSync(OUT, { recursive: true, force: true });
 copyDir(path.join(ROOT, "public"), OUT);
 
 const posts = loadPosts();
+const tags = collectTags(posts);
+const tagMap = new Map(tags);
 write("index.html", homePage(posts));
-write("writing/index.html", writingIndex(posts));
+write("writing/index.html", writingIndex(posts, tags));
 write("404.html", notFound());
+for (const [tag, tagged] of tags) write(`writing/tags/${tagSlug(tag)}/index.html`, tagPage(tag, tagged));
 for (const post of posts) {
-  write(`writing/${post.slug}/index.html`, postPage(post));
+  write(`writing/${post.slug}/index.html`, postPage(post, tagMap));
   if (post.assetsDir) {
     copyDir(post.assetsDir, path.join(OUT, "writing", post.slug), (name) => name === "index.md");
   }
 }
 
-console.log(`Built ${posts.length} post${posts.length === 1 ? "" : "s"} into dist/${INCLUDE_DRAFTS ? " (drafts included)" : ""}`);
+console.log(
+  `Built ${posts.length} post${posts.length === 1 ? "" : "s"} and ${tags.length} tag page${tags.length === 1 ? "" : "s"} into dist/${INCLUDE_DRAFTS ? " (drafts included)" : ""}`
+);
