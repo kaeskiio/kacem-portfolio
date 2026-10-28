@@ -206,7 +206,7 @@ ${site.research
     </section>`);
   }
 
-  sections.push(`    <section aria-labelledby="experience">
+  if (site.experience?.length) sections.push(`    <section aria-labelledby="experience">
       <h2 id="experience">Experience</h2>
       <dl class="cv">
 ${site.experience

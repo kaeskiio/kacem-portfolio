@@ -12,7 +12,7 @@ npm run build    # production build into dist/ (drafts excluded)
 
 ## Edit the home page
 
-Everything on the home page is in `site.config.mjs`: the focus sentence, intro, research, experience, projects, and links. Leave `research` empty to hide that section.
+Everything on the home page is in `site.config.mjs`: the focus sentence, intro, research, and links. Leave `research` empty to hide that section.
 
 ## Write a post
 
