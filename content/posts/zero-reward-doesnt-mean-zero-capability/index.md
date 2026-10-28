@@ -198,5 +198,3 @@ Everything quantitative here comes from toy models with binary rewards and indep
 - Sutton, R. S., McAllester, D., Singh, S., and Mansour, Y. (2000). Policy Gradient Methods for Reinforcement Learning with Function Approximation. NeurIPS 12. https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinfo
 - Williams, R. J. (1992). Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning. Machine Learning 8, 229–256. https://doi.org/10.1007/BF00992696
 - Yu, Q., et al. (2025). DAPO: An Open-Source LLM Reinforcement Learning System at Scale. arXiv:2503.14476. https://arxiv.org/abs/2503.14476
-
-*I worked on this with a lot of help from Claude (Anthropic), which wrote most of the simulation code, ran the experiments, checked the math and drafted much of the text. The code, raw results and full derivations are available on request.*
