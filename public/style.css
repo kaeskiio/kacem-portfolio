@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --paper: #f6f3ec;
   --paper-deep: #ece8df;
   --ink: #1f1e1b;
@@ -11,16 +12,6 @@
   --measure: 34rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #181816;
-    --paper-deep: #232320;
-    --ink: #ecebe6;
-    --muted: #a29f97;
-    --rule: #34332f;
-    --clay: #e39a72;
-  }
-}
 
 *,
 *::before,

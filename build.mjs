@@ -101,7 +101,7 @@ function page({ title, description, body, path: urlPath = "/", math = false, typ
   <meta property="og:title" content="${esc(title || site.name)}">
   <meta property="og:description" content="${esc(description || site.description)}">
   <meta property="og:type" content="${type}">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/style.css">${mathHead}
   <script defer src="/_vercel/insights/script.js"></script>
