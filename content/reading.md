@@ -7,7 +7,7 @@ Papers I've been reading or keep coming back to, grouped by topic, with a line o
 
 <nav class="reading-toc" aria-label="Sections">
 
-**Sections.** [Start here](#start) · [Reasoning and test-time compute](#reasoning) · [Pruning and stopping](#pruning) · [Inference and the KV cache](#inference) · [Quantization and compression](#quantization) · [Beyond attention](#architectures) · [Vision-language models](#vlm) · [Interpretability](#interp) · [Alignment and learning from feedback](#alignment) · [Control, sandbagging and elicitation](#control) · [Agents](#agents) · [Scaling and training](#scaling)
+**Sections.** [Start here](#start) · [Reasoning and test-time compute](#reasoning) · [Pruning and stopping](#pruning) · [Inference and the KV cache](#inference) · [Quantization and compression](#quantization) · [Beyond attention](#architectures) · [Vision-language models](#vlm) · [JEPAs and world models](#jepa) · [Interpretability](#interp) · [Alignment and learning from feedback](#alignment) · [Control, sandbagging and elicitation](#control) · [Agents](#agents) · [Scaling and training](#scaling)
 
 </nav>
 
@@ -99,6 +99,27 @@ If you only read five things on this page, I'd pick these.
 - **[Token Merging: Your ViT But Faster](https://arxiv.org/abs/2210.09461)**. Bolya et al. (2022). Merge similar tokens as they go through the network to speed it up without retraining.
 - **[An Image is Worth 1/2 Tokens After Layer 2](https://arxiv.org/abs/2403.06764)**. Chen et al. (2024). FastV. VLMs barely attend to image tokens after the first couple of layers, so you can drop half of them.
 - **[CoVisco: Codec-Native Vision Encoder with Native Token Compression for Unified Image-Video Understanding](https://arxiv.org/abs/2609.39924)**. Liu et al. (2026). Takes codec-native video and summarizes each segment with a few learnable tokens, so long videos fit in one pass. With 64 frames it gets close to a much heavier encoder using only 400 visual tokens.
+
+<h2 id="jepa">JEPAs and world models</h2>
+
+Joint-embedding predictive architectures learn by predicting the representation of a missing part of the input, instead of the raw pixels or tokens. The bet is that predicting in an abstract space lets a model ignore unpredictable detail and learn what matters, which is the route Yann LeCun has argued leads to world models.
+
+- **[A Path Towards Autonomous Machine Intelligence](https://openreview.net/pdf?id=BZ5a1r-kVsf)**. LeCun (2022). The position paper that lays out JEPAs and why they might be a better path to world models than generative prediction. Long, but the first sections are the whole idea.
+- **[Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture](https://arxiv.org/abs/2301.08243)**. Assran et al. (2023). I-JEPA. Predict the representations of masked image blocks from a visible context block, with no hand-made augmentations.
+- **[Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)**. Bardes et al. (2024). V-JEPA. The same recipe on video, learned purely by predicting features of masked regions.
+- **[V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning](https://arxiv.org/abs/2506.09985)**. Assran et al. (2025). Pretrained on over a million hours of video, then turned into an action-conditioned world model with under 62 hours of robot video that can pick and place objects by planning toward an image goal.
+- **[LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics](https://arxiv.org/abs/2511.08544)**. Balestriero and LeCun (2025). Argues the embeddings should follow an isotropic Gaussian and adds one regularizer to get there, replacing a pile of training tricks.
+- **[MC-JEPA: A Joint-Embedding Predictive Architecture for Self-Supervised Learning of Motion and Content Features](https://arxiv.org/abs/2307.12698)**. Bardes, Ponce and LeCun (2023). One encoder learns both optical flow and content features, and each helps the other.
+- **[VL-JEPA: Joint Embedding Predictive Architecture for Vision-language](https://arxiv.org/abs/2512.10942)**. Chen et al. (2025). A vision-language model that predicts text embeddings instead of generating tokens, and only decodes to text when needed.
+- **[LLM-JEPA: Large Language Models Meet Joint Embedding Predictive Architectures](https://arxiv.org/abs/2509.14252)**. Huang, LeCun and Balestriero (2025). Adds a JEPA objective to language model training and reports gains over the standard objective.
+- **[A-JEPA: Joint-Embedding Predictive Architecture Can Listen](https://arxiv.org/abs/2311.15830)**. Fei et al. (2023). The JEPA recipe applied to audio spectrograms.
+- **[How JEPA Avoids Noisy Features: The Implicit Bias of Deep Linear Self Distillation Networks](https://arxiv.org/abs/2407.03475)**. Littwin et al. (2024). In solvable linear models, JEPA-style objectives favor influential features while reconstruction favors high-variance ones. A nice theory companion to the empirical papers.
+- **[DINO-WM: World Models on Pre-trained Visual Features enable Zero-shot Planning](https://arxiv.org/abs/2411.04983)**. Zhou, Pan, LeCun and Pinto (2024). A world model that predicts future DINOv2 features instead of pixels and plans by matching goal features.
+- **[Bootstrap Your Own Latent](https://arxiv.org/abs/2006.07733)**. Grill et al. (2020). BYOL. Learn by predicting one view's representation from another with no negative examples, an important ancestor of JEPAs.
+- **[VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning](https://arxiv.org/abs/2105.04906)**. Bardes, Ponce and LeCun (2021). Keeps joint-embedding methods from collapsing with simple variance and covariance penalties.
+- **[Masked Autoencoders Are Scalable Vision Learners](https://arxiv.org/abs/2111.06377)**. He et al. (2021). The reconstruct-the-pixels alternative that JEPAs are usually compared against.
+- **[data2vec](https://arxiv.org/abs/2202.03555)**. Baevski et al. (2022). Predict a teacher's latent representations of masked input, with one recipe for speech, vision and text.
+- **[DINOv2: Learning Robust Visual Features without Supervision](https://arxiv.org/abs/2304.07193)**. Oquab et al. (2023). Strong general-purpose self-supervised image features, and the backbone a lot of world-model work builds on.
 
 <h2 id="interp">Interpretability</h2>
 
