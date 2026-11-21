@@ -112,6 +112,7 @@ function page({ title, description, body, path: urlPath = "/", math = false, typ
     <a class="site-name" href="/">${esc(site.name)}</a>
     <nav aria-label="Main">
       <a href="/writing/"${urlPath.startsWith("/writing") ? ' aria-current="page"' : ""}>Writing</a>
+      <a href="/reading/"${urlPath.startsWith("/reading") ? ' aria-current="page"' : ""}>Reading</a>
     </nav>
   </header>
   <main>
@@ -373,6 +374,21 @@ write("index.html", homePage(posts));
 write("writing/index.html", writingIndex(posts, categories));
 for (const [c, ps] of categories) write(`writing/topics/${tagSlug(c)}/index.html`, categoryPage(c, ps));
 write("404.html", notFound());
+
+// Reading list: content/reading.md (front matter title/description, Markdown body).
+const READING = path.join(ROOT, "content", "reading.md");
+if (fs.existsSync(READING)) {
+  const { data, body } = parseFrontMatter(fs.readFileSync(READING, "utf8"));
+  write(
+    "reading/index.html",
+    page({
+      title: data.title || "Reading list",
+      description: data.description,
+      path: "/reading/",
+      body: `    <article class="post reading">\n    <h1>${esc(data.title || "Reading list")}</h1>\n${renderMarkdown(body).html}\n    </article>`,
+    })
+  );
+}
 for (const [tag, tagged] of tags) write(`writing/tags/${tagSlug(tag)}/index.html`, tagPage(tag, tagged));
 for (const post of posts) {
   write(`writing/${post.slug}/index.html`, postPage(post, tagMap));
