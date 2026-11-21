@@ -7,7 +7,7 @@ Papers I've been reading or keep coming back to, grouped by topic, with a line o
 
 <nav class="reading-toc" aria-label="Sections">
 
-**Sections.** [Start here](#start) · [Reasoning and test-time compute](#reasoning) · [Pruning and stopping](#pruning) · [Inference and the KV cache](#inference) · [Quantization and compression](#quantization) · [Beyond attention](#architectures) · [Vision-language models](#vlm) · [JEPAs and world models](#jepa) · [System One models (Jev)](#jev) · [Interpretability](#interp) · [Alignment and learning from feedback](#alignment) · [Control, sandbagging and elicitation](#control) · [Agents](#agents) · [Scaling and training](#scaling)
+**Sections.** [Start here](#start) · [Reasoning and test-time compute](#reasoning) · [Pruning and stopping](#pruning) · [Inference and the KV cache](#inference) · [Quantization and compression](#quantization) · [Beyond attention](#architectures) · [Vision-language models](#vlm) · [JEPAs and world models](#jepa) · [System One models (Jev)](#jev) · [Structured outputs and calibrated probabilities](#calibration) · [Interpretability](#interp) · [Alignment and learning from feedback](#alignment) · [Control, sandbagging and elicitation](#control) · [Agents](#agents) · [Scaling and training](#scaling)
 
 </nav>
 
@@ -132,6 +132,38 @@ Jev is a different thing from a JEPA. It's a model from the startup TypeSafe AI,
 - **[JevVibe: Efficient Classification-Guided Secure Code Generation](https://arxiv.org/abs/2609.34963)**. Rezvani, Behrouzi and Sadeghi (2026). Uses Jev to label the kind of security weakness in code, then feeds that diagnosis to a repair agent. Competitive with a frontier LLM on ranking the right label while being much faster and cheaper.
 - **[DICE: Tilting the Odds through Interface Attacks on System One Model](https://arxiv.org/abs/2610.14404)**. Dong, Lu, Guo and Wang (2026). Even if the model itself is untouched, whoever controls how the state is extracted, how the question is phrased or how the output is read can steer the decision. A useful reminder that "calibrated" only covers the model, not the pipeline around it.
 - **[On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599)**. Guo et al. (2017). Not about Jev, but the background for what "calibrated probabilities" should mean and how networks usually fail at it.
+
+<h2 id="calibration">Structured outputs and calibrated probabilities</h2>
+
+The two halves of what Jev promises. First, getting a model's answer into a fixed shape, so software can use it without parsing free text. Second, making the probability attached to that answer mean something, so that "85% sure" is right about 85% of the time and the model can say "I don't know" when it should. Each half has a big literature of its own.
+
+**Calibration and confidence**
+
+- **[On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599)**. Guo et al. (2017). Modern networks are overconfident, and a single temperature parameter fixes a lot of it. The standard starting point, with reliability diagrams and expected calibration error.
+- **[Strictly Proper Scoring Rules, Prediction, and Estimation](https://doi.org/10.1198/016214506000001437)**. Gneiting and Raftery (2007). The theory of scoring rules like log loss and the Brier score, which reward honest probabilities. Useful for thinking about what training for calibration should optimize.
+- **[Language Models (Mostly) Know What They Know](https://arxiv.org/abs/2207.05221)**. Kadavath et al. (2022). Pretrained LLMs are fairly well calibrated on multiple choice, and can be trained to predict whether their own answers are right.
+- **[Teaching Models to Express Their Uncertainty in Words](https://arxiv.org/abs/2205.14334)**. Lin, Hilton and Evans (2022). A model can be trained to say how confident it is in plain language, and those stated confidences can be calibrated.
+- **[Just Ask for Calibration](https://arxiv.org/abs/2305.14975)**. Tian et al. (2023). For RLHF models, asking for a stated confidence is often better calibrated than the model's own token probabilities.
+- **[Taming Overconfidence in LLMs: Reward Calibration in RLHF](https://arxiv.org/abs/2410.09724)**. Leng et al. (2024). RLHF tends to make models overconfident, partly because reward models favor confident answers, and this paper tries to fix the reward side. Relevant to any "RL for calibration" claim.
+- **[Calibrate Before Use: Improving Few-Shot Performance of Language Models](https://arxiv.org/abs/2102.09690)**. Zhao et al. (2021). Few-shot predictions are biased toward certain labels, and a simple correction from a content-free input removes much of it.
+- **[Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation](https://arxiv.org/abs/2302.09664)**. Kuhn, Gal and Farquhar (2023). Measure uncertainty over meanings instead of exact strings, since many different sentences say the same thing.
+- **[Calibrated Language Models Must Hallucinate](https://arxiv.org/abs/2311.14648)**. Kalai and Vempala (2023). A calibrated model has to make up some facts that appeared only once in its training data. A sobering counterpoint to "never hallucinates".
+- **[Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)**. Kalai, Nachum, Vempala and Zhang (2025). Benchmarks reward confident guessing over admitting uncertainty, so models learn to guess. Argues for scoring that gives credit for abstaining.
+
+**Abstaining and guarantees**
+
+- **[Selective Classification for Deep Neural Networks](https://arxiv.org/abs/1705.08500)**. Geifman and El-Yaniv (2017). Let a classifier decline to answer when unsure, and control its error rate on the answers it does give.
+- **[A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification](https://arxiv.org/abs/2107.07511)**. Angelopoulos and Bates (2021). Turn any model's scores into prediction sets with a guaranteed coverage rate. Very readable.
+- **[Conformal Language Modeling](https://arxiv.org/abs/2306.10193)**. Quach et al. (2023). Conformal guarantees for open-ended generation, sampling until a set of answers is very likely to contain a good one.
+- **[Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners](https://arxiv.org/abs/2307.01928)**. Ren et al. (2023). A robot planner turns the LLM's choice probabilities into a conformal set and asks a human when the set has more than one option. A nice example of a typed decision with a probability actually being used.
+
+**Getting outputs into a fixed shape**
+
+- **[Efficient Guided Generation for Large Language Models](https://arxiv.org/abs/2307.09702)**. Willard and Louf (2023). Outlines. Compile a regular expression or JSON schema into a state machine and mask out any token that would break it.
+- **[Grammar-Constrained Decoding for Structured NLP Tasks without Finetuning](https://arxiv.org/abs/2305.13971)**. Geng et al. (2023). Use formal grammars to force outputs into the structure a task needs.
+- **[SGLang: Efficient Execution of Structured Language Model Programs](https://arxiv.org/abs/2312.07104)**. Zheng et al. (2023). A serving system with fast constrained decoding, among other things.
+- **[XGrammar: Flexible and Efficient Structured Generation Engine for Large Language Models](https://arxiv.org/abs/2411.15100)**. Dong et al. (2024). Makes grammar-constrained decoding nearly free in serving overhead.
+- **[Let Me Speak Freely? A Study on the Impact of Format Restrictions on Performance of Large Language Models](https://arxiv.org/abs/2408.02442)**. Tam et al. (2024). Forcing a model to answer in strict JSON can hurt its reasoning. Worth keeping in mind when a model's whole interface is a fixed format.
 
 <h2 id="interp">Interpretability</h2>
 
