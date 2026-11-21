@@ -131,7 +131,6 @@ Jev is a different thing from a JEPA. It's a model from the startup TypeSafe AI,
 - **[Jev in the Wild: A Data-Driven Analysis of the Jev Model's Functionality, Applications and Ecosystem](https://arxiv.org/abs/2609.30216)**. Ling, Xue and Ye (2026). Looks at over 2,000 public GitHub projects using Jev. Scoring and attribute judgments are the most common uses.
 - **[JevVibe: Efficient Classification-Guided Secure Code Generation](https://arxiv.org/abs/2609.34963)**. Rezvani, Behrouzi and Sadeghi (2026). Uses Jev to label the kind of security weakness in code, then feeds that diagnosis to a repair agent. Competitive with a frontier LLM on ranking the right label while being much faster and cheaper.
 - **[DICE: Tilting the Odds through Interface Attacks on System One Model](https://arxiv.org/abs/2610.14404)**. Dong, Lu, Guo and Wang (2026). Even if the model itself is untouched, whoever controls how the state is extracted, how the question is phrased or how the output is read can steer the decision. A useful reminder that "calibrated" only covers the model, not the pipeline around it.
-- **[On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599)**. Guo et al. (2017). Not about Jev, but the background for what "calibrated probabilities" should mean and how networks usually fail at it.
 
 <h2 id="calibration">Structured outputs and calibrated probabilities</h2>
 
