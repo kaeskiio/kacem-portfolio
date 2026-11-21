@@ -428,3 +428,17 @@ td {
     margin-top: 3rem;
   }
 }
+
+/* Reading list */
+.reading-toc {
+  font-size: 0.92rem;
+  line-height: 1.9;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.6rem 0;
+  margin: 1.4rem 0 0.5rem;
+}
+.reading-toc p { margin: 0; }
+.reading h2 { scroll-margin-top: 1rem; }
+.reading li { margin-bottom: 0.55rem; }
