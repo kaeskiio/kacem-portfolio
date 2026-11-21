@@ -7,7 +7,7 @@ Papers I've been reading or keep coming back to, grouped by topic, with a line o
 
 <nav class="reading-toc" aria-label="Sections">
 
-**Sections.** [Start here](#start) · [Reasoning and test-time compute](#reasoning) · [Pruning and stopping](#pruning) · [Inference and the KV cache](#inference) · [Quantization and compression](#quantization) · [Beyond attention](#architectures) · [Vision-language models](#vlm) · [JEPAs and world models](#jepa) · [Interpretability](#interp) · [Alignment and learning from feedback](#alignment) · [Control, sandbagging and elicitation](#control) · [Agents](#agents) · [Scaling and training](#scaling)
+**Sections.** [Start here](#start) · [Reasoning and test-time compute](#reasoning) · [Pruning and stopping](#pruning) · [Inference and the KV cache](#inference) · [Quantization and compression](#quantization) · [Beyond attention](#architectures) · [Vision-language models](#vlm) · [JEPAs and world models](#jepa) · [System One models (Jev)](#jev) · [Interpretability](#interp) · [Alignment and learning from feedback](#alignment) · [Control, sandbagging and elicitation](#control) · [Agents](#agents) · [Scaling and training](#scaling)
 
 </nav>
 
@@ -120,6 +120,18 @@ Joint-embedding predictive architectures learn by predicting the representation 
 - **[Masked Autoencoders Are Scalable Vision Learners](https://arxiv.org/abs/2111.06377)**. He et al. (2021). The reconstruct-the-pixels alternative that JEPAs are usually compared against.
 - **[data2vec](https://arxiv.org/abs/2202.03555)**. Baevski et al. (2022). Predict a teacher's latent representations of masked input, with one recipe for speech, vision and text.
 - **[DINOv2: Learning Robust Visual Features without Supervision](https://arxiv.org/abs/2304.07193)**. Oquab et al. (2023). Strong general-purpose self-supervised image features, and the backbone a lot of world-model work builds on.
+
+<h2 id="jev">System One models (Jev)</h2>
+
+Jev is a different thing from a JEPA. It's a model from the startup TypeSafe AI, announced in September 2026, that TypeSafe calls a "System One model" after Kahneman's fast, intuitive thinking. Instead of writing text, it takes some program state and returns a typed decision, like a choice from a fixed set or a score, with a probability attached, all in one parallel pass. TypeSafe says it's trained with a method it calls Reinforcement Learning for Calibrated Decisions (RLCD) but hasn't published a technical report, so most of the speed, cost and calibration numbers are the company's own. The outside papers below are the best way to see how it actually holds up.
+
+- **[Introducing System One Models & Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)**. Almeida (2026, TypeSafe AI blog). The launch post. It explains the idea and the API, but not how RLCD works.
+- **[Evaluating and Benchmarking the System One Model Jev](https://arxiv.org/abs/2609.37647)**. Deußer, Ramamurthy, Sparrenberg and Sifa (2026). An independent zero-shot test on 37 datasets. Jev does very well on standard classification and multiple-choice sets, beats Gemma everywhere and Qwen on most, struggles where everyone struggles, and tends to repeat useless actions in text-game environments.
+- **[The Hitchhiker's Guide to System 1 Models: Fast Decision-Making Beyond LLMs](https://arxiv.org/abs/2610.33775)**. Roitman (2026). A survey of models that make fast typed decisions in one forward pass, with a taxonomy and how they pair with slower LLMs in a cascade. A good map of the area.
+- **[Jev in the Wild: A Data-Driven Analysis of the Jev Model's Functionality, Applications and Ecosystem](https://arxiv.org/abs/2609.30216)**. Ling, Xue and Ye (2026). Looks at over 2,000 public GitHub projects using Jev. Scoring and attribute judgments are the most common uses.
+- **[JevVibe: Efficient Classification-Guided Secure Code Generation](https://arxiv.org/abs/2609.34963)**. Rezvani, Behrouzi and Sadeghi (2026). Uses Jev to label the kind of security weakness in code, then feeds that diagnosis to a repair agent. Competitive with a frontier LLM on ranking the right label while being much faster and cheaper.
+- **[DICE: Tilting the Odds through Interface Attacks on System One Model](https://arxiv.org/abs/2610.14404)**. Dong, Lu, Guo and Wang (2026). Even if the model itself is untouched, whoever controls how the state is extracted, how the question is phrased or how the output is read can steer the decision. A useful reminder that "calibrated" only covers the model, not the pipeline around it.
+- **[On Calibration of Modern Neural Networks](https://arxiv.org/abs/1706.04599)**. Guo et al. (2017). Not about Jev, but the background for what "calibrated probabilities" should mean and how networks usually fail at it.
 
 <h2 id="interp">Interpretability</h2>
 
