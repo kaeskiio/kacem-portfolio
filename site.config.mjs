@@ -12,6 +12,7 @@ export default {
   ],
 
   // The first thing visitors read. Keep it to one sentence.
+  quote: { text: "The only thing I know is that I know nothing.", by: "Socrates" },
   focus: "I love doing research in AI alignment and model interpretability.",
 
   intro:

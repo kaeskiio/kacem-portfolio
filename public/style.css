@@ -442,3 +442,35 @@ td {
 .reading-toc p { margin: 0; }
 .reading h2 { scroll-margin-top: 1rem; }
 .reading li { margin-bottom: 0.55rem; }
+
+/* Epigraph on the home page */
+.epigraph {
+  margin: 4.5rem 0 0;
+  padding: 0;
+  color: var(--muted);
+}
+.epigraph blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.epigraph blockquote p {
+  margin: 0;
+}
+.epigraph figcaption {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  font-variant: small-caps;
+}
+.epigraph + .focus {
+  margin-top: 2.25rem;
+}
+@media (max-width: 40rem) {
+  .epigraph {
+    margin-top: 3rem;
+  }
+}

@@ -208,7 +208,13 @@ ${posts
 function homePage(posts) {
   const sections = [];
 
-  sections.push(`    <p class="focus">${inline(site.focus)}</p>
+  const quote = site.quote
+    ? `    <figure class="epigraph">
+      <blockquote><p>“${esc(site.quote.text)}”</p></blockquote>
+      ${site.quote.by ? `<figcaption>${esc(site.quote.by)}</figcaption>` : ""}
+    </figure>\n`
+    : "";
+  sections.push(`${quote}    <p class="focus">${inline(site.focus)}</p>
     <p>${inline(site.intro)}</p>`);
 
   if (site.research?.length) {
